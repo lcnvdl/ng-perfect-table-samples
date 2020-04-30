@@ -1,0 +1,62 @@
+<div class="container">
+
+  <h1>Perfect Table Demo</h1>
+
+  <h2>Table 1 - Users from jsonPlaceholder</h2>
+
+  <pft-data-source #users [dataSourceInput]="usersDataSourceInput" [pageSize]="5"></pft-data-source>
+
+  <div class="row">
+    <div class="col-12">
+      <pft-data-table [dataSource]="users" [table]="usersTableInput" pftClass="table table-dark">
+        <tbody pftBody>
+          <tr *ngFor="let entity of users.entities">
+            <td>{{entity.id}}</td>
+            <td>{{entity.name}}</td>
+            <td><a href="mailto:{{entity.email}}">{{entity.email}}</a></td>
+          </tr>
+        </tbody>
+      </pft-data-table>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-12">
+      <pft-paginator strFirst="«" strLast="»" [showRelativeNavigationButtons]="false" [dataSource]="users">
+      </pft-paginator>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Table 2 - Forced delay</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="delay">Delay (ms)</label>
+      <input id="delay" name="delay" [(ngModel)]="delay" class="form-control">
+    </div>
+  </form>
+
+  <pft-data-source #ds [dataSourceInput]="dataSourceInput" [pageSize]="5"></pft-data-source>
+
+  <div class="row">
+    <div class="col-12">
+      <pft-data-table [dataSource]="ds" [table]="tableInput" pftClass="table table-dark">
+        <tbody pftBody>
+          <tr *ngFor="let entity of ds.entities">
+            <td>{{entity.id}}</td>
+            <td>{{entity.name}}</td>
+          </tr>
+        </tbody>
+      </pft-data-table>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-12">
+      <pft-paginator strFirst="«" strLast="»" [showRelativeNavigationButtons]="false" [dataSource]="ds"></pft-paginator>
+    </div>
+  </div>
+
+</div>
