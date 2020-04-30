@@ -1,0 +1,1 @@
+# ng-perfect-table-samples
