@@ -31,18 +31,18 @@ pft-data-table {
   }
 
   /* Loader */
-  table {
+  table, table thead, table tbody {
     width: 100%;
   }
 
-  table thead,
-  table tbody {
+  table.loading.empty thead,
+  table.loading.empty tbody {
     display: table;
-    width: 100%;
   }
 
   table.loading tbody {
     position: relative;
+    min-height: 100px;
   }
 
   table.loading tbody:after {

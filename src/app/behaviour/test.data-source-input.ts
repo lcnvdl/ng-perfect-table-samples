@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { SortType, ISortDefinition, IDataSourceInput, ILoadPageResult } from 'ng-perfect-table-beta';
+import { SortType, ISortDefinition, IDataSourceInput, ILoadPageResult } from 'ng-perfect-table';
 
 export class DataSourceInputTest implements IDataSourceInput {
     constructor(public delay = 0) {
@@ -7,7 +7,7 @@ export class DataSourceInputTest implements IDataSourceInput {
 
     load(page: number, count: number, filters?: any, sort?: ISortDefinition[]): Observable<ILoadPageResult> {
         const result: ILoadPageResult = {
-            total: 25,
+            total: 100,
             entities: this.getEntities(page, count, filters, sort)
         };
 
@@ -26,17 +26,32 @@ export class DataSourceInputTest implements IDataSourceInput {
     private getEntities(page, count, filters, sort?: ISortDefinition[]): any[] {
         const list = [];
 
-        let from = page * count;
-        let to = (page + 1) * count;
+        const from = page * count;
+        const to = (page + 1) * count;
 
-        for (let i = 0; i < 25; i++) {
-            list.push({ id: i, name: "ABC" });
+        const abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const total = 100;
+
+        const getRandomChar = () => abc[Math.floor(Math.random() * abc.length)];
+        const getRandomName = () => {
+            let len = 2 + Math.random() * 5;
+            let name = getRandomChar();
+
+            while (len-- > 0) {
+                name += getRandomChar().toLowerCase();
+            }
+
+            return name;
+        };
+
+        for (let i = 0; i < total; i++) {
+            list.push({ id: i, name: getRandomName() });
         }
 
         if (sort && sort.filter(m => m.type !== SortType.None).length > 0) {
             const s = sort.find(m => m.type !== SortType.None);
             list.sort((a, b) => {
-                if (s.type == SortType.Asc) {
+                if (s.type === SortType.Asc) {
                     return a[s.column] - b[s.column];
                 }
                 else {
@@ -45,9 +60,9 @@ export class DataSourceInputTest implements IDataSourceInput {
             });
         }
 
-        let finalList = [];
+        const finalList = [];
 
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < total; i++) {
             if (i >= from && i < to) {
                 finalList.push(list[i]);
             }

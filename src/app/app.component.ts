@@ -2,7 +2,7 @@ import { UserService } from './services/user.service';
 import { UserDataSourceInput } from './behaviour/user.data-source-input';
 import { Component } from '@angular/core';
 import { DataSourceInputTest } from './behaviour/test.data-source-input';
-import { ColumnDefinition, ITableInput } from "ng-perfect-table-beta";
+import { ColumnDefinition, ITableInput } from "ng-perfect-table";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   get delay() {
-    return this.dataSourceInput.delay+"";
+    return this.dataSourceInput.delay + "";
   }
 
   set delay(v) {
@@ -33,15 +33,15 @@ export class AppComponent {
   makeUsersTable() {
     this.usersDataSourceInput = new UserDataSourceInput(this.userSv);
 
-    let col = new ColumnDefinition();
+    const col = new ColumnDefinition();
     col.id = "id";
     col.title = "ID";
 
-    let col2 = new ColumnDefinition();
+    const col2 = new ColumnDefinition();
     col2.id = "name";
     col2.title = "Name";
 
-    let col3 = new ColumnDefinition();
+    const col3 = new ColumnDefinition();
     col3.id = "email";
     col3.title = "E-Mail";
 
@@ -57,10 +57,11 @@ export class AppComponent {
   makeTestTable() {
     this.dataSourceInput = new DataSourceInputTest(2000);
 
-    let col = new ColumnDefinition();
+    const col = new ColumnDefinition();
     col.id = "id";
     col.title = "ID";
-    let col2 = new ColumnDefinition();
+
+    const col2 = new ColumnDefinition();
     col2.id = "name";
     col2.title = "Name";
 
